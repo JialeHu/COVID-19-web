@@ -10,6 +10,9 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
 
+const apiServer = require("./apiServer.js");
+
+// --------------------------------Setup Express----------------------------------
 const app = express();
 app.use(express.static(__dirname + "/build"));
 app.use(session({
@@ -20,7 +23,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Setup DB
+// --------------------------------Setup DB----------------------------------
 // const url = "mongodb://localhost:27017/covid19DB" // TODO
 const url = "mongodb+srv://covid19-app:hjl123321@cluster0.wjy9x.mongodb.net/covid19DB?retryWrites=true&w=majority";
 mongoose.connect(url, {
@@ -69,6 +72,10 @@ passport.use(new GoogleStrategy({
         });
     }
 ));
+
+// -----------------------------Handle Requests---------------------------------
+// API Server
+apiServer(app, User);
 
 // Google OAuth Login
 app.get("/auth/google", passport.authenticate("google", { scope: ["profile"] }));
