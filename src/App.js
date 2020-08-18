@@ -17,10 +17,9 @@ function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
   function checkLoggedIn() {
-    fetch("/isLoggedIn", {method: "POST"}).then(res => {
-      console.log(res);
-      console.log(res.text());
-      if (res.status === 200) {
+    fetch("/isLoggedIn", {method: "POST"}).then(res => res.text()).then(text => {
+      console.log(text);
+      if (res.text === "true") {
         setLoggedIn(true);
       } else {
         setLoggedIn(false);
