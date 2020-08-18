@@ -81,9 +81,9 @@ app.get("/auth/google/secrets",
 });
 
 // Signup
-app.get("/signup", (req, res) => {
-    res.send("This will be signup page");
-});
+// app.get("/signup", (req, res) => {
+//     res.send("This will be signup page");
+// });
 
 app.post("/signup", (req, res) => {
     const apis = uuidAPIKey.create(); // Generate Api key
@@ -104,9 +104,9 @@ app.post("/signup", (req, res) => {
 });
 
 // Login
-app.get("/login", (req, res) => {
-    res.send("This will be login page");
-});
+// app.get("/login", (req, res) => {
+//     res.send("This will be login page");
+// });
 
 app.post("/login", (req, res) => {
     const user = new User({

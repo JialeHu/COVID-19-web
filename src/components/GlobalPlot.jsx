@@ -7,7 +7,7 @@ import Spinner from "react-bootstrap/Spinner"
 function GlobalPlot() {
     const [lineData, setLineData] = useState({});
 
-    const apiUrl = "http://35.188.65.80/covid19?apikey=DH2VFXQ-C564NRA-GV6C6XB-W6YPCYQ";
+    const apiUrl = "35.188.65.80:443/covid19?apikey=DH2VFXQ-C564NRA-GV6C6XB-W6YPCYQ";
     fetch(apiUrl).then(response => response.json()).then(data => {
 
         let dateLabel = [];
