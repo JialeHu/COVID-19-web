@@ -13,7 +13,7 @@ const findOrCreate = require("mongoose-findorcreate");
 const app = express();
 app.use(express.static(__dirname + "/build"));
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET, //TODO
     resave: false,
     saveUninitialized: false
 }));
@@ -51,8 +51,8 @@ passport.deserializeUser(function (id, done) {
 
 // Google OAuth2.0
 passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    clientID: process.env.GOOGLE_CLIENT_ID,   //TODO
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,   //TODO
     callbackURL: "http://localhost:4000/auth/google/secrets",   // TODO
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
     },  
