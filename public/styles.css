@@ -15,6 +15,7 @@ hr {
 body {
     background: #eee;
     background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+    padding-top: 70px;
 }
 
 footer {
@@ -31,4 +32,13 @@ footer p {
 
 .component-padding {
     padding: 15px 15px;
+}
+
+.ct-label.ct-label.ct-horizontal.ct-end {
+    position: relative;
+    justify-content: flex-end;
+    text-align: right;
+    transform-origin: 100% 0;
+    transform: translate(-100%) rotate(-45deg);
+    white-space: nowrap;
 }
