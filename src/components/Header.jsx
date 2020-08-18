@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -11,16 +12,16 @@ function Header(props) {
 
   return (
     <Navbar collapseOnSelect expand="md" bg="info" variant="dark">
-      <Navbar.Brand href="/">Covid-19 Tracking</Navbar.Brand>
+      <Navbar.Brand as={Link} to="/">Covid-19 Tracking</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto">
-          <Nav.Link href="/doc">REST API</Nav.Link>
-          {!props.isLoggedIn && <Nav.Link href="/login">Login</Nav.Link>}
-          {!props.isLoggedIn && <Nav.Link href="/signup">Sign Up for API</Nav.Link>}
+          <Nav.Link as={Link} to="/doc">REST API</Nav.Link>
+          {!props.isLoggedIn && <Nav.Link as={Link} to="/login">Login</Nav.Link>}
+          {!props.isLoggedIn && <Nav.Link as={Link} to="/signup">Sign Up for API</Nav.Link>}
           {props.isLoggedIn && 
           <NavDropdown title="Me">
-            <NavDropdown.Item href="/account">My API Account</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to="/account">My API Account</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item onSelect={logout}>Logout</NavDropdown.Item>
           </NavDropdown>}
