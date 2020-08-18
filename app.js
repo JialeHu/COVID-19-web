@@ -118,9 +118,9 @@ app.post("/login", (req, res) => {
 
 app.post("/isloggedin", (req, res) => {
     if (req.isAuthenticated()) {
-        res.sendStatus(200);
+        res.send(true);
     } else {
-        res.sendStatus(403);
+        res.send(false);
     }
 });
 
