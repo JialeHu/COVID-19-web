@@ -8,7 +8,7 @@ function GlobalPlot() {
     const [lineData, setLineData] = useState({});
 
     const apiUrl = "35.188.65.80:443/covid19?apikey=DH2VFXQ-C564NRA-GV6C6XB-W6YPCYQ";
-    fetch(apiUrl).then(response => response.json()).then(data => {
+    fetch(apiUrl).then(response => {console.log(response); return response.json()}).then(data => { // TODO
 
         let dateLabel = [];
         let confirmed = [];

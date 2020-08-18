@@ -20,7 +20,7 @@ function Header(props) {
           {!props.isLoggedIn && <Nav.Link as={Link} to="/login">Login</Nav.Link>}
           {!props.isLoggedIn && <Nav.Link as={Link} to="/signup">Sign Up for API</Nav.Link>}
           {props.isLoggedIn && 
-          <NavDropdown title="Me">
+          <NavDropdown title="Me" id="dropdown-menu-align-right">
             <NavDropdown.Item as={Link} to="/account">My API Account</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item onSelect={logout}>Logout</NavDropdown.Item>
