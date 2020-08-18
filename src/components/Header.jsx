@@ -8,6 +8,7 @@ function Header(props) {
   
   function logout() {
     fetch("/logout");
+    window.location.reload();
   }
 
   return (

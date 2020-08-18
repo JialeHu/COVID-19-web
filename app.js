@@ -159,6 +159,6 @@ app.get('*', (req,res) =>{
 });
 
 // Listen Requests
-const listener = app.listen(process.env.PORT || 4000, () => {
+const listener = app.listen(process.env.PORT || 3000, () => {
     console.log("Server is up on ", listener.address());
 });
