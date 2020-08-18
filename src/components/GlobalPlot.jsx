@@ -9,9 +9,7 @@ function GlobalPlot() {
 
     // const apiUrl = "https://35.188.65.80/covid19?apikey=DH2VFXQ-C564NRA-GV6C6XB-W6YPCYQ";
     const apiUrl = "/api?apikey=DH2VFXQ-C564NRA-GV6C6XB-W6YPCYQ";
-    fetch(apiUrl).then(response => {console.log(response); return response.text()}).then(data => { // TODO
-        console.log(data); //TODO
-        return;
+    fetch(apiUrl).then(response => response.json()).then(data => {
 
         let dateLabel = [];
         let confirmed = [];
@@ -31,23 +29,6 @@ function GlobalPlot() {
         }
         setLineData(plotData);
     });
-
-
-
-    
-    // data.reduceRight((_, d) => {
-    //     let date = new Date(d._id);
-    //     let dateStr = new Intl.DateTimeFormat('en', {month: 'short', day: '2-digit'}).format(date);
-    //     dateLabel.push(dateStr);
-    //     confirmed.push(d.Global_Confirmed);
-    //     deaths.push(d.Global_Deaths);
-    //     recovered.push(d.Global_Recoverd);
-    // }, null);
-    
-    // let lineData = {
-    //     labels: dateLabel,
-    //     series: [confirmed, recovered, deaths]
-    // }
 
     var lineOptions = {
         low: 0,
