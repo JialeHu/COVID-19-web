@@ -2,6 +2,7 @@
 require("dotenv").config(); // Use .env file
 
 const express = require("express");
+const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const uuidAPIKey = require('uuid-apikey');
 const session = require("express-session");
@@ -14,6 +15,9 @@ const apiServer = require("./apiServer.js");
 
 // --------------------------------Setup Express----------------------------------
 const app = express();
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 app.use(express.static(__dirname + "/build"));
 app.use(session({
     secret: process.env.SESSION_SECRET, //TODO
