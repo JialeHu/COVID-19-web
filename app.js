@@ -11,7 +11,7 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
 
 const app = express();
-app.use(express.static(__dirname + "/build"));
+app.use(express.static(__dirname + "/build/static"));
 app.use(session({
     secret: process.env.SESSION_SECRET, //TODO
     resave: false,
@@ -159,8 +159,7 @@ app.get("/apiKey", (req, res) => {
 
 // Home
 app.get("/", (req, res) => {
-    // res.sendFile(__dirname + "/build/index.html");
-    res.send("This will be home page");
+    res.sendFile(__dirname + "/build/index.html");
 });
 
 // Other Requests
