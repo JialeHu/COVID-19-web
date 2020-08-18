@@ -11,7 +11,7 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
 
 const app = express();
-app.use(express.static(__dirname + "/build/static"));
+app.use(express.static(__dirname + "/build"));
 app.use(session({
     secret: process.env.SESSION_SECRET, //TODO
     resave: false,
