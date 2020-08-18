@@ -36,6 +36,7 @@ mongoose.connect(url, {
     useCreateIndex: true
 }); // for Deprecate warning
 const userSchema = new mongoose.Schema({
+    username: String,
     email: String,
     password: String,
     googleId: String,
@@ -95,6 +96,7 @@ app.get("/auth/google/callback",
 app.post("/signup", (req, res) => {
     const apis = uuidAPIKey.create(); // Generate Api key
     User.register({
+        username: req.body.email,
         email: req.body.email,
         uuid: apis.uuid,
         apiKey: apis.apiKey
@@ -112,7 +114,7 @@ app.post("/signup", (req, res) => {
 
 app.post("/login", (req, res) => {
     const user = new User({
-        email: req.body.email,
+        username: req.body.email,
         password: req.body.password
     });
     req.login(user, (err) => {
