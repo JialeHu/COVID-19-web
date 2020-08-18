@@ -19,7 +19,7 @@ function App() {
   function checkLoggedIn() {
     fetch("/isLoggedIn", {method: "POST"}).then(res => res.text()).then(text => {
       console.log(text);
-      if (res.text === "true") {
+      if (text === "true") {
         setLoggedIn(true);
       } else {
         setLoggedIn(false);
