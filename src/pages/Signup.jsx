@@ -19,12 +19,12 @@ function Signup() {
                             </Form.Text>
                         </Form.Group>
 
-                        <Form.Group controlId="formBasicPassword">
+                        <Form.Group controlId="formBasicPassword1">
                             <Form.Label>Password</Form.Label>
                             <Form.Control className="form-control" type="password" placeholder="Enter password" name="password" required="true"/>
                         </Form.Group>
 
-                        <Form.Group controlId="formBasicPassword">
+                        <Form.Group controlId="formBasicPassword2">
                             <Form.Control className="form-control" type="password" placeholder="Enter password again" required="true"/>
                         </Form.Group>
 

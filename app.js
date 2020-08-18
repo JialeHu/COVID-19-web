@@ -53,7 +53,7 @@ passport.deserializeUser(function (id, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,   //TODO
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,   //TODO
-    callbackURL: "http://localhost:4000/auth/google/secrets",   // TODO
+    callbackURL: "https://covid19-ad.herokuapp.com/auth/google/callback",   // TODO
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
     },  
     function(accessToken, refreshToken, profile, cb) {
@@ -73,17 +73,13 @@ passport.use(new GoogleStrategy({
 // Google OAuth Login
 app.get("/auth/google", passport.authenticate("google", { scope: ["profile"] }));
 // Google OAuth callback
-app.get("/auth/google/secrets",
+app.get("/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/" }),
     function(req, res) {
     // Successful authentication, redirect home.
     res.redirect("/");
 });
 
-// Signup
-// app.get("/signup", (req, res) => {
-//     res.send("This will be signup page");
-// });
 
 app.post("/signup", (req, res) => {
     const apis = uuidAPIKey.create(); // Generate Api key
@@ -102,11 +98,6 @@ app.post("/signup", (req, res) => {
         }
     });
 });
-
-// Login
-// app.get("/login", (req, res) => {
-//     res.send("This will be login page");
-// });
 
 app.post("/login", (req, res) => {
     const user = new User({
