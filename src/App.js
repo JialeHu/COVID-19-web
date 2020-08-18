@@ -14,22 +14,22 @@ import Signup from "./pages/Signup";
 import Account from "./pages/Account";
 
 function App() {
-  const [isLoggedin, setLoggedin] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
-  function checkLoggedIn(setLoggedin) {
+  function checkLoggedIn() {
     fetch("/isLoggedIn", {method: "POST"}).then(res => {
       if (res.status === 200) {
-        setLoggedin(true);
+        setLoggedIn(true);
       } else {
-        setLoggedin(false);
+        setLoggedIn(false);
       }
     });
   }
-  checkLoggedIn(setLoggedin);
+  checkLoggedIn();
 
   return (
     <Router>
-      <Header loggedin={isLoggedin} />
+      <Header isLoggedIn={isLoggedIn} />
 
       <Switch>
         <Route exact path="/">
@@ -39,13 +39,13 @@ function App() {
           <Doc />
         </Route>
         <Route exact path="/signup">
-          {isLoggedin ? <Redirect to="/" /> : <Signup />}
+          {isLoggedIn ? <Redirect to="/" /> : <Signup />}
         </Route>
         <Route exact path="/login">
-          {isLoggedin ? <Redirect to="/" /> : <Login />}
+          {isLoggedIn ? <Redirect to="/" /> : <Login />}
         </Route>
         <Route exact path="/account">
-          {isLoggedin ? <Account /> : <Redirect to="/" />}
+          {isLoggedIn ? <Account /> : <Redirect to="/" />}
         </Route>
         {/* <Route path="*" component={() => <Redirect to="/" />} /> */}
       </Switch>
