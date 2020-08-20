@@ -57,7 +57,7 @@ function GlobalPlot() {
                     d: {
                         begin: 700 * data.index,
                         dur: 1000,
-                        from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()+15).stringify(),
+                        from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()+40).stringify(),
                         to: data.path.clone().stringify(),
                         easing: Chartist.Svg.Easing.easeOutQuint
                     }

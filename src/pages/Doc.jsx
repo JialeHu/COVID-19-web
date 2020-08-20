@@ -2,7 +2,7 @@ import React from "react";
 
 function Doc() {
     return (
-        <h1>
+        <h1 className="top-padding">
             This will be Documentation page
         </h1>
     );

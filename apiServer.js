@@ -111,7 +111,7 @@ function apiServer(app, User) {
                     }    
                 }, {
                     $group: {_id: "$Country_Region"}
-                },{
+                }, {
                     $sort: { _id: 1 }
                 }
             ], (err, results) => {
@@ -139,6 +139,21 @@ function apiServer(app, User) {
         } catch (err) {
             res.send(err);
         }
+    });
+
+    // GET latest country data
+    app.get("/api/now/:country_region", (req, res) => {
+        let apiKey = req.query.apikey;
+        let country = req.params.country_region;
+
+        validateApiKey(apiKey, (user) => {
+            if (!user) {
+                res.sendStatus(403);
+                return;
+            }
+
+            
+        });
     });
 
     // GET country data by time

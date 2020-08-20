@@ -48,7 +48,9 @@ function Home() {
 
             <Row className="justify-content-center text-center" id="section5">
                 <Col xs="10" lg="8">
-                    <h1>Data source</h1>
+                    <p>Data Source: COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University</p>
+                    <a href="https://github.com/CSSEGISandData/COVID-19">https://github.com/CSSEGISandData/COVID-19</a>
+                    <p>Copyright ⓒ {new Date().getFullYear()}</p>
                 </Col>
             </Row>
 

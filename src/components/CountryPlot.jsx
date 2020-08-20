@@ -10,7 +10,7 @@ function CountryPlot() {
 
     function fetchCountryData(country) {
         
-        const apiUrl = "/" + country + "/api?apikey=DH2VFXQ-C564NRA-GV6C6XB-W6YPCYQ";
+        const apiUrl = "/api/" + country + "?apikey=DH2VFXQ-C564NRA-GV6C6XB-W6YPCYQ";
         fetch(apiUrl).then(response => response.json()).then(data => {
             let dateLabel = [];
             let confirmed = [];
