@@ -9,7 +9,7 @@ import GlobalPlot from "../components/GlobalPlot";
 function Home() {
 
     return (
-        <Container fluid className="top-padding">
+        <Container fluid>
             <Row className="justify-content-center" id="section1">
                 <Col md="auto" xs="auto">
                     <h1>Intro</h1>

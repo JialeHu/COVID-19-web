@@ -36,8 +36,7 @@ const url = "mongodb+srv://covid19-app:hjl123321@cluster0.wjy9x.mongodb.net/covi
 mongoose.connect(url, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    useCreateIndex: true,
-    allowDiskUse:true
+    useCreateIndex: true
 }); // for Deprecate warning
 const userSchema = new mongoose.Schema({
     email: String,

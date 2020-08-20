@@ -193,7 +193,7 @@ function apiServer(app, User) {
                     } else {
                         res.send(results);
                     }
-                });
+                }).allowDiskUse(true);
             } else {
                 Data.aggregate([
                     {
@@ -221,7 +221,7 @@ function apiServer(app, User) {
                     } else {
                         res.send(results);
                     }
-                });
+                }).allowDiskUse(true);
             }
         });
     });
