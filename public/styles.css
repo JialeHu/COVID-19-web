@@ -49,6 +49,10 @@ footer p {
     color: dimgrey;
 }
 
+.align-center {
+    text-align: center;
+}
+
 #main-navbar {
     background: #00bcd4;
 }

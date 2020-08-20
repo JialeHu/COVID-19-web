@@ -287,11 +287,12 @@ function apiServer(app, User) {
         if (!apiKey) {
             callback(null);
         } else {
-            User.findOne({apiKey: apiKey}, (err, data) => {
+            User.findOneAndUpdate({apiKey: apiKey}, {$inc: {"count": 1}}, {new: true}, (err, user) => {
                 if (err) {
                     console.error(err);
+                    callback(null);
                 } else {
-                    callback(data);
+                    callback(user);
                 }
             });
         }

@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 import GlobalPlot from "../components/GlobalPlot";
 import CountrySelector from "../components/CountrySelector";
@@ -15,9 +16,10 @@ function Home() {
 
     return (
         <Container fluid>
-            <Row className="justify-content-center" id="section1">
+            <Row className="justify-content-center bottom-padding align-center" id="section1">
                 <Col md="auto" xs="auto">
-                    <h1>Intro</h1>
+                    <h1>Data Preview</h1>
+                    <ArrowDownwardIcon />
                 </Col>
             </Row>
 

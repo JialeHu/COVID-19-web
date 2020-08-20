@@ -36,14 +36,16 @@ const url = "mongodb+srv://covid19-app:hjl123321@cluster0.wjy9x.mongodb.net/covi
 mongoose.connect(url, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useFindAndModify: false
 }); // for Deprecate warning
 const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     googleId: String,
     uuid: String,
-    apiKey: String
+    apiKey: String,
+    count: Number
 });
 userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
@@ -75,7 +77,8 @@ passport.use(new GoogleStrategy({
             googleId: profile.id
         }, {
             uuid: apis.uuid,
-            apiKey: apis.apiKey
+            apiKey: apis.apiKey,
+            count: 0
         }, 
         function (err, user) {
             return cb(err, user);
@@ -132,7 +135,8 @@ app.post("/signup", (req, res, next) => {
         username: req.body.username,
         email: req.body.username,
         uuid: apis.uuid,
-        apiKey: apis.apiKey
+        apiKey: apis.apiKey,
+        count: 0
     }), req.body.password, (err, user) => {
         if (err) {
             console.log(err);
