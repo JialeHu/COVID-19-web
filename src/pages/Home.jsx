@@ -10,7 +10,8 @@ import CountrySelector from "../components/CountrySelector";
 import CountryPlot from "../components/CountryPlot";
 
 function Home() {
-    const [country, setCountry] = useState("US");
+    const defaultCountry = "US"
+    const [country, setCountry] = useState(defaultCountry);
 
     return (
         <Container fluid>
@@ -37,8 +38,8 @@ function Home() {
                 </Col>
             </Row>
             <Row className="justify-content-center text-center bottom-padding" id="section3">
-                <Col xs="10" lg="4">
-                    <CountrySelector setCountry={setCountry} />
+                <Col xs="8" lg="4">
+                    <CountrySelector setCountry={setCountry} defaultCountry={defaultCountry} />
                     <hr />
                     <CountryPlot country={country}/>
                 </Col>

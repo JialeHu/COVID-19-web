@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ChartistGraph from "react-chartist";
 import Chartist from "chartist";
 import Legend from "chartist-plugin-legend";
-import Spinner from "react-bootstrap/Spinner"
+import Spinner from 'react-bootstrap/Spinner';
 
 
 function GlobalPlot() {
@@ -17,7 +17,7 @@ function GlobalPlot() {
             let deaths = [];
             let recovered = [];
             for (var i = data.length-1; i >= 0; i--) {
-                if (i % 10 !== 0) continue;
+                if (i % 7 !== 0) continue;
 
                 let date = new Date(data[i]._id);
                 let dateStr = new Intl.DateTimeFormat('en', {month: 'short', day: '2-digit'}).format(date);

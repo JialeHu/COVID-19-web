@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ChartistGraph from "react-chartist";
 import Chartist from "chartist";
 import ChartistTooltip from "chartist-plugin-tooltips-updated";
-import Spinner from "react-bootstrap/Spinner"
+import Spinner from 'react-bootstrap/Spinner';
 
 
 function CountryPlot(props) {
@@ -34,9 +34,9 @@ function CountryPlot(props) {
         });
     }
 
-    if (!pieData.series) {
+    useEffect(() => {
         fetchCountryData(props.country);
-    }
+    });
 
     const pieOptions = {
         donut: true,
