@@ -37,6 +37,18 @@ footer p {
     padding-top: 70px;
 }
 
+.bottom-padding {
+    padding-bottom: 50px;
+}
+
+.button-padding {
+    margin: 5% 3% 5% 0;
+}
+
+.link-font {
+    color: dimgrey;
+}
+
 #main-navbar {
     background: #00bcd4;
 }

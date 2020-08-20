@@ -19,6 +19,16 @@ function apiServer(app, User) {
     };
     const Data = mongoose.model("Data", dataSchema);
 
+    function getLatestDate(callback) {
+        Data.findOne().sort({Date: -1}).exec(function(err, data) {
+            if (err) {
+                callback(err, null);
+            } else {
+                callback(null, data.Date);
+            }
+        });
+    }
+
     // Latest Snapshot (Query: apiKey, from(optional), to(optional))
     app.get("/api", (req, res) => {
         let apiKey = req.query.apikey;
@@ -125,20 +135,17 @@ function apiServer(app, User) {
         });
     });
 
-    // GET all data by time
-    app.get("/api/all", (req, res) => {
+    // GET raw data by time
+    app.get("/api/raw", (req, res) => {
         let apikey = req.query.apikey;
+        let from = req.query.from;
+        let to = req.query.to;
+
         if (!apikey) {
             res.sendStatus(403);
             return;
         }
-        try {
-            let from = new Date(req.query.from);
-            let to = new Date(req.query.to);
-
-        } catch (err) {
-            res.send(err);
-        }
+        
     });
 
     // GET latest country data
@@ -147,12 +154,43 @@ function apiServer(app, User) {
         let country = req.params.country_region;
 
         validateApiKey(apiKey, (user) => {
-            if (!user) {
-                res.sendStatus(403);
-                return;
-            }
+            if (!user) return res.sendStatus(403);
 
-            
+            getLatestDate((err, date) => {
+                if (err) {
+                    console.error(err);
+                    res.send(500);
+                } else {
+                    Data.aggregate([
+                        {
+                            $match: {
+                                Country_Region: country,
+                                Date: date
+                            }
+                        }, {
+                            $group: {
+                                _id: "Country_Region",
+                                Confirmed: {
+                                    $sum: "$Confirmed"
+                                },
+                                Deaths: {
+                                    $sum: "$Deaths"
+                                },
+                                Recovered: {
+                                    $sum: "$Recovered"
+                                }
+                            }
+                        }
+                    ], (err, results) => {
+                        if (err) {
+                            console.error(err);
+                            res.send(500);
+                        } else {
+                            res.send(results[0]);
+                        }
+                    });
+                }
+            });
         });
     });
 
