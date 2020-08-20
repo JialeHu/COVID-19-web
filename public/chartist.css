@@ -1,0 +1,61 @@
+
+/* Chartist X Label */
+.ct-label.ct-label.ct-horizontal.ct-end {
+    position: relative;
+    justify-content: flex-end;
+    text-align: right;
+    transform-origin: 100% 0;
+    transform: translate(-100%) rotate(-45deg);
+    white-space: nowrap;
+}
+
+/* Legend */
+.ct-legend {
+    position: relative;
+    text-align: center; /*position of the group, use either left or right*/
+    z-index: 10;
+}
+.ct-legend li {
+    display: inline; /* make the legend in one row */
+    text-align: center;
+    position: relative;
+    padding-left: 23px;
+    list-style-type: none; /* makes the default bullet invisible */
+}
+.ct-legend li:before {
+    width: 10px; /* how big is the color */
+    height: 10px; /* how big is the color */
+    position: absolute;
+    left: 0;
+    content: '';
+    border: 3px solid transparent;
+    border-radius: 50%;
+}
+.ct-legend.ct-legend-inside {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.ct-series-1 {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+.ct-series-2 {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+.ct-series-0:before {
+    background-color: #d70206; /* you have yo match the color to your chartist stroke for each line or whatever */
+    border-color: white;
+    margin-top: 3px;
+}
+.ct-series-1:before {
+    background-color: #f05b4f;
+    border-color: white;
+    margin-top: 3px;
+}
+.ct-series-2:before {
+    background-color: #f4c63d;
+    border-color: white;
+    margin-top: 3px;
+}

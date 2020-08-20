@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const uuidAPIKey = require('uuid-apikey');
 const session = require("express-session");
+const flash = require('connect-flash');
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
@@ -15,6 +16,8 @@ const apiServer = require("./apiServer.js");
 
 // --------------------------------Setup Express----------------------------------
 const app = express();
+app.use(flash());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -33,14 +36,13 @@ const url = "mongodb+srv://covid19-app:hjl123321@cluster0.wjy9x.mongodb.net/covi
 mongoose.connect(url, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    allowDiskUse:true
 }); // for Deprecate warning
 const userSchema = new mongoose.Schema({
-    username: String,
     email: String,
     password: String,
     googleId: String,
-    secret: String,
     uuid: String,
     apiKey: String
 });
@@ -48,12 +50,16 @@ userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
 const User = mongoose.model("User", userSchema);
 passport.use(User.createStrategy());
-passport.serializeUser(function (user, done) {
-    done(null, user._id);
+// passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
 });
 passport.deserializeUser(function (id, done) {
-    User.findById(id, function (err, user) {
-        done(null, user._id);
+    User.findById(id, function(err, user) {
+        if (err) {
+            console.log(err);
+        }
+        done(null, user.id);
     });
 });
 
@@ -61,7 +67,7 @@ passport.deserializeUser(function (id, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,   //TODO
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,   //TODO
-    callbackURL: "https://covid19-ad.herokuapp.com/auth/google/callback",   // TODO
+    callbackURL: "https://covid19-d.herokuapp.com/auth/google/callback",   // TODO
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
     },  
     function(accessToken, refreshToken, profile, cb) {
@@ -85,38 +91,69 @@ apiServer(app, User);
 // Google OAuth Login
 app.get("/auth/google", passport.authenticate("google", { scope: ["profile"] }));
 // Google OAuth callback
-app.get("/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/" }),
-    function(req, res) {
+app.get("/auth/google/callback", passport.authenticate("google", { failureRedirect: "/" }),
+    function(_, res) {
     // Successful authentication, redirect home.
     res.redirect("/");
 });
 
 
-app.post("/signup", (req, res) => {
+// app.post("/signup", (req, res) => {
+//     if (req.isAuthenticated()) {
+//         res.redirect("/");
+//         return;
+//     }
+//     const apis = uuidAPIKey.create(); // Generate Api key
+//     User.register(new User({
+//         username: req.body.email,
+//         email: req.body.email,
+//         uuid: apis.uuid,
+//         apiKey: apis.apiKey
+//     }), req.body.password, (err, user) => {
+//         if (err) {
+//             console.error(err);
+//             res.sendStatus(500);
+//         } else {
+//             console.log(user); // TODO
+//             passport.authenticate("local", (err, user, info) => {
+//                 if (err) return next(err);
+//                 if (!user) res.redirect("/");
+                
+//                 req.logIn(user, (err) => {
+
+//                 });
+//             })(req, res, next);
+//         }
+//     });
+// });
+
+app.post("/signup", (req, res, next) => {
     const apis = uuidAPIKey.create(); // Generate Api key
-    User.register({
-        username: req.body.email,
-        email: req.body.email,
+    User.register(new User({
+        username: req.body.username,
+        email: req.body.username,
         uuid: apis.uuid,
         apiKey: apis.apiKey
-    }, req.body.password, (err, user) => {
+    }), req.body.password, (err, user) => {
         if (err) {
-            console.error(err);
-            res.sendStatus(500);
-        } else {
-            passport.authenticate("local")(req, res, () => {
-                res.redirect("/");
-            });
+            console.log(err);
+            return res.send(500);
         }
+        next();
     });
-});
+}, passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/"
+}));
 
 app.post("/login", (req, res) => {
+    if (req.isAuthenticated()) return res.redirect("/");
+
     const user = new User({
-        username: req.body.email,
+        username: req.body.username,
         password: req.body.password
     });
+
     req.login(user, (err) => {
         if (err) {
             console.error(err);

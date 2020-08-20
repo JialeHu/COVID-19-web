@@ -12,8 +12,8 @@ function Header(props) {
   }
 
   return (
-    <Navbar collapseOnSelect expand="md" bg="info" variant="dark" fixed="top">
-      <Navbar.Brand as={Link} to="/">Covid-19 Tracking</Navbar.Brand>
+    <Navbar collapseOnSelect expand="md" variant="dark" fixed="top" id="main-navbar">
+      <Navbar.Brand as={Link} to="/">COVID-19 API</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="ml-auto">

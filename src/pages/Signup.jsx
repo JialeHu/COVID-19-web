@@ -7,13 +7,13 @@ import Col from 'react-bootstrap/Col';
 
 function Signup() {
     return (
-        <Container>
+        <Container className="top-padding">
             <Row className="justify-content-center component-padding">
                 <Col md="auto" xs="auto">
                     <Form action="/signup" method="POST">
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control className="form-control" type="email" placeholder="Enter email" name="email" required="true" autoFocus />
+                            <Form.Control className="form-control" type="email" placeholder="Enter email" name="username" required="true" autoFocus />
                             <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
                             </Form.Text>
@@ -21,12 +21,12 @@ function Signup() {
 
                         <Form.Group controlId="formBasicPassword1">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control className="form-control" type="password" placeholder="Enter password" name="password" required="true"/>
+                            <Form.Control className="form-control" type="password" placeholder="Set password" name="password" required="true"/>
                         </Form.Group>
 
-                        <Form.Group controlId="formBasicPassword2">
+                        {/* <Form.Group controlId="formBasicPassword2">
                             <Form.Control className="form-control" type="password" placeholder="Enter password again" required="true"/>
-                        </Form.Group>
+                        </Form.Group> */}
 
                         <Button variant="secondary" type="submit">
                             Sign Up

@@ -5,12 +5,12 @@ import Legend from "chartist-plugin-legend";
 import Spinner from "react-bootstrap/Spinner"
 
 
-function GlobalPlot() {
+function CountryPlot() {
     const [lineData, setLineData] = useState({});
 
-    function fetchGlobalData() {
-        // const apiUrl = "https://35.188.65.80/covid19?apikey=DH2VFXQ-C564NRA-GV6C6XB-W6YPCYQ";
-        const apiUrl = "/api?apikey=DH2VFXQ-C564NRA-GV6C6XB-W6YPCYQ";
+    function fetchCountryData(country) {
+        
+        const apiUrl = "/" + country + "/api?apikey=DH2VFXQ-C564NRA-GV6C6XB-W6YPCYQ";
         fetch(apiUrl).then(response => response.json()).then(data => {
             let dateLabel = [];
             let confirmed = [];
@@ -73,4 +73,4 @@ function GlobalPlot() {
     );
 }
 
-export default GlobalPlot;
+export default CountryPlot;
