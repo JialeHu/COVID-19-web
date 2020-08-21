@@ -18,7 +18,6 @@ function Doc() {
                 </Jumbotron>
             );
         });
-        console.log(jumbotrons);
         return jumbotrons;
     }
 
@@ -26,6 +25,7 @@ function Doc() {
         <Container className="top-padding">
             <p>{"Replace <> with your query parameter."}</p>
             <p>{"Signup to get your API key."}</p>
+            <p>{"Data are returned in JSON."}</p>
             {generateJumbotron()}
         </Container>
     );

@@ -41,6 +41,10 @@ footer p {
     padding-bottom: 50px;
 }
 
+.left-padding {
+    padding-left: 10%;
+}
+
 .button-padding {
     margin: 5% 3% 5% 0;
 }
@@ -84,4 +88,8 @@ footer p {
 
 .jumbotron {
     background-color: #dbe3e5;
+}
+
+.input-prepend {
+    color: #dbe3e5;
 }

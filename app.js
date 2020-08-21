@@ -60,7 +60,11 @@ passport.deserializeUser(function (id, done) {
         if (err) {
             console.log(err);
         }
-        done(null, user.id);
+        if (user) {
+            done(null, user.id);
+        } else {
+            done("Username or password does not match", null);
+        }
     });
 });
 
@@ -183,7 +187,7 @@ app.get("/logout", (req, res) => {
 });
 
 // API Key
-app.get("/apiKey", (req, res) => {
+app.get("/apikey", (req, res) => {
     if (req.isAuthenticated()) {
         User.findById(req.user, function(err, foundUser){
             if (err) {
@@ -191,6 +195,24 @@ app.get("/apiKey", (req, res) => {
                 res.sendStatus(500);
             } else if (foundUser) {
                 res.send(foundUser.apiKey);
+            } else {
+                res.sendStatus(404);
+            }
+        });
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+// API Count
+app.get("/apicount", (req, res) => {
+    if (req.isAuthenticated()) {
+        User.findById(req.user, function(err, foundUser){
+            if (err) {
+                console.error(err);
+                res.sendStatus(500);
+            } else if (foundUser) {
+                res.send(foundUser.count.toString());
             } else {
                 res.sendStatus(404);
             }

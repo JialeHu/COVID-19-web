@@ -184,7 +184,7 @@ function apiServer(app, User) {
                     ], (err, results) => {
                         if (err) {
                             console.error(err);
-                            res.send(500);
+                            res.sendStatus(500);
                         } else {
                             res.send(results[0]);
                         }

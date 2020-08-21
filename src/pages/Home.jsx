@@ -16,14 +16,17 @@ function Home() {
 
     return (
         <Container fluid>
-            <Row id="section1">
+            <Row className="left-padding" id="section1">
                 <Col md="auto" xs="auto">
-                    <h2>Intro</h2>
+                    <h1>API for COVID-19 Data, for Free</h1>
+                    <li>Sourced from JHU CSSE</li>
+                    <li>Up-to-date</li>
+                    <li>RESTful</li>
                 </Col>
             </Row>
             <Row className="justify-content-center bottom-padding align-center" id="section1">
                 <Col md="auto" xs="auto">
-                    <h3>Data Preview</h3>
+                    <h5>Data Preview</h5>
                     <ArrowDownwardIcon />
                 </Col>
             </Row>

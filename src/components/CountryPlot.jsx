@@ -98,7 +98,7 @@ function CountryPlot(props) {
       
     return (
         pieData.series ? 
-        <ChartistGraph className="ct-square" data={pieData} options={pieOptions} type={"Pie"} listener={listener}/> 
+        <ChartistGraph className="ct-square" data={pieData} options={pieOptions} type={"Pie"} /> 
         : <Spinner animation="border"/>   
     );
 }
