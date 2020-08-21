@@ -46,10 +46,10 @@ function Account() {
             </Row>
 
             <Row className="justify-content-center top-padding">
-                <h6>Any Issues? We Appreciate Your Feedback!</h6>
+                <h6>Any Issue? We Appreciate Your Feedback!</h6>
             </Row>
             <Row className="justify-content-center top-padding">
-                <p>Feedback by <a className="link-font" href="mailto: hjljjdd@gmail.com?subject=COVID19 API Feedback">Sending Email</a></p>
+                <a className="link-font" href="mailto: hjljjdd@gmail.com?subject=COVID19 API Feedback">Sending Email</a>
             </Row>
         </Container>
     );
