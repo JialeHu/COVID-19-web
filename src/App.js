@@ -36,7 +36,7 @@ function App() {
           <Home />
         </Route>
         <Route exact path="/doc">
-          <Doc />
+          <Doc className="top-padding"/>
         </Route>
         <Route exact path="/signup">
           {isLoggedIn ? <Redirect to="/" /> : <Signup />}

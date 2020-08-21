@@ -16,9 +16,14 @@ function Home() {
 
     return (
         <Container fluid>
+            <Row id="section1">
+                <Col md="auto" xs="auto">
+                    <h2>Intro</h2>
+                </Col>
+            </Row>
             <Row className="justify-content-center bottom-padding align-center" id="section1">
                 <Col md="auto" xs="auto">
-                    <h1>Data Preview</h1>
+                    <h3>Data Preview</h3>
                     <ArrowDownwardIcon />
                 </Col>
             </Row>

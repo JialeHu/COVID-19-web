@@ -40,7 +40,7 @@ mongoose.connect(url, {
     useFindAndModify: false
 }); // for Deprecate warning
 const userSchema = new mongoose.Schema({
-    email: String,
+    username: String,
     password: String,
     googleId: String,
     uuid: String,
@@ -133,7 +133,6 @@ app.post("/signup", (req, res, next) => {
     const apis = uuidAPIKey.create(); // Generate Api key
     User.register(new User({
         username: req.body.username,
-        email: req.body.username,
         uuid: apis.uuid,
         apiKey: apis.apiKey,
         count: 0
