@@ -10,7 +10,7 @@ import GlobalPlot from "../components/GlobalPlot";
 import CountrySelector from "../components/CountrySelector";
 import CountryPlot from "../components/CountryPlot";
 
-function Home() {
+function Home(props) {
     const defaultCountry = "US"
     const [country, setCountry] = useState(defaultCountry);
 
@@ -61,9 +61,16 @@ function Home() {
                     <Link to="/doc">
                         <Button className="button-padding" variant="outline-dark" size="lg">API Doc</Button>
                     </Link>
-                    <Link to="/signup">
-                        <Button className="button-padding" variant="outline-dark" size="lg">Signup</Button>
-                    </Link>
+                    {props.isLoggedIn ? 
+                        <Link to="/account">
+                            <Button className="button-padding" variant="outline-dark" size="lg">My Account</Button>
+                        </Link>
+                        :
+                        <Link to="/signup">
+                            <Button className="button-padding" variant="outline-dark" size="lg">Signup</Button>
+                        </Link>
+                    }
+                    
                 </Col>
             </Row>
 

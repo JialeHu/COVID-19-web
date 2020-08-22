@@ -33,7 +33,7 @@ function App() {
 
       <Switch>
         <Route exact path="/">
-          <Home />
+          <Home isLoggedIn={isLoggedIn} />
         </Route>
         <Route exact path="/doc">
           <Doc className="top-padding"/>
