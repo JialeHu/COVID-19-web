@@ -77,6 +77,7 @@ passport.use(new GoogleStrategy({
     },  
     function(accessToken, refreshToken, profile, cb) {
         const apis = uuidAPIKey.create(); // Generate Api key
+        console.log(profile);   // TODO
         User.findOrCreate({
             googleId: profile.id
         }, {
