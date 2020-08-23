@@ -1,5 +1,8 @@
 
 const mongoose = require('mongoose');
+const CronJob = require('cron').CronJob;
+
+const updateDatabase = require("./updateDatabase.js");
 
 function apiServer(app, User) {
     const dataSchema = {
@@ -19,6 +22,21 @@ function apiServer(app, User) {
     };
     const Data = mongoose.model("Data", dataSchema);
 
+    // -----------------------------Update Database Once a Day--------------
+    const job = new CronJob('0 0 1 * * 0-6', function() {
+            // Runs every day at 01:00:00 AM.
+            console.log("Start Updating Database");
+            updateDatabase(Data);
+        }, function() {
+            // This function is executed when job.stop()
+            console.log("Done updating database");
+        },
+        true, /* Start the job right now */
+        "America/New_York" /* Time zone of this job. */
+    );
+    job.start();
+
+    // -----------------------------Utility Function------------------------
     function getLatestDate(callback) {
         Data.findOne().sort({Date: -1}).exec(function(err, data) {
             if (err) {
@@ -28,6 +46,8 @@ function apiServer(app, User) {
             }
         });
     }
+
+    // -----------------------------API Requests----------------------------
 
     // Latest Snapshot (Query: apiKey, from(optional), to(optional))
     app.get("/api", (req, res) => {

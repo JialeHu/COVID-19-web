@@ -90,10 +90,10 @@ passport.use(new GoogleStrategy({
     }
 ));
 
-// -----------------------------Handle Requests---------------------------------
-// API Server
+// -----------------------------API Server-------------------------
 apiServer(app, User);
 
+//-------------------------------Web Server------------------------
 // Google OAuth Login
 app.get("/auth/google", passport.authenticate("google", { scope: ["profile"] }));
 // Google OAuth callback
