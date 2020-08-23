@@ -36,7 +36,7 @@ function CountryPlot(props) {
 
     useEffect(() => {
         fetchCountryData(props.country);
-    });
+    }, []);
 
     const pieOptions = {
         donut: true,

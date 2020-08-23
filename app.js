@@ -96,7 +96,10 @@ apiServer(app, User);
 
 //-------------------------------Web Server------------------------
 // Google OAuth Login
-app.get("/auth/google", passport.authenticate("google", { scope: ["profile"] }));
+app.get("/auth/google", passport.authenticate("google", { scope: [
+    'https://www.googleapis.com/auth/userinfo.profile',
+    'https://www.googleapis.com/auth/userinfo.email'] 
+}));
 // Google OAuth callback
 app.get("/auth/google/callback", passport.authenticate("google", { failureRedirect: "/" }),
     function(_, res) {
