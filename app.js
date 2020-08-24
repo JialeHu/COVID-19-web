@@ -61,7 +61,7 @@ passport.deserializeUser(function (id, done) {
             console.log(err);
         }
         if (user) {
-            done(null, user.id);
+            done(null, user);
         } else {
             done("Username or password does not match", null);
         }
@@ -147,7 +147,6 @@ app.post("/signup", (req, res, next) => {
     }), req.body.password, (err, user) => {
         if (err) {
             console.log(err);
-            return res.send(500);
         }
         next();
     });
@@ -156,25 +155,33 @@ app.post("/signup", (req, res, next) => {
     failureRedirect: "/"
 }));
 
-app.post("/login", (req, res) => {
-    if (req.isAuthenticated()) return res.redirect("/");
+// app.post("/login", (req, res) => {
+//     if (req.isAuthenticated()) return res.redirect("/");
 
-    const user = new User({
-        username: req.body.username,
-        password: req.body.password
-    });
+//     const user = new User({
+//         username: req.body.username,
+//         password: req.body.password
+//     });
 
-    req.login(user, (err) => {
-        if (err) {
-            console.error(err);
-            res.sendStatus(500);
-        } else {
-            passport.authenticate("local")(req, res, () => {
-                res.redirect("/");
-            });
-        }
-    });
-});
+//     req.login(user, (err) => {
+//         if (err) {
+//             console.error(err);
+//             res.sendStatus(500);
+//         } else {
+//             passport.authenticate("local")(req, res, () => {
+//                 res.redirect("/");
+//             });
+//         }
+//     });
+// });
+
+app.post('/login', passport.authenticate('local', 
+    { 
+        successRedirect: '/',
+        failureRedirect: '/',
+        failureFlash: true 
+    })
+);
 
 app.post("/isloggedin", (req, res) => {
     if (req.isAuthenticated()) {
