@@ -77,10 +77,10 @@ passport.use(new GoogleStrategy({
     },  
     function(accessToken, refreshToken, profile, cb) {
         const apis = uuidAPIKey.create(); // Generate Api key
-        console.log(profile);   // TODO
         User.findOrCreate({
             googleId: profile.id
         }, {
+            username: profile.emails[0].value,
             uuid: apis.uuid,
             apiKey: apis.apiKey,
             count: 0
@@ -98,8 +98,8 @@ apiServer(app, User);
 // Google OAuth Login
 app.get("/auth/google", passport.authenticate("google", { scope: [
     'https://www.googleapis.com/auth/userinfo.profile',
-    'https://www.googleapis.com/auth/userinfo.email'] 
-}));
+    'https://www.googleapis.com/auth/userinfo.email'
+] }));
 // Google OAuth callback
 app.get("/auth/google/callback", passport.authenticate("google", { failureRedirect: "/" }),
     function(_, res) {
