@@ -20,7 +20,7 @@ function GlobalPlot() {
                 if (i % 7 !== 0) continue;
 
                 let date = new Date(data[i]._id);
-                let dateStr = new Intl.DateTimeFormat('en', {month: 'short', day: '2-digit'}).format(date);
+                let dateStr = new Intl.DateTimeFormat('en', {month: 'short', day: '2-digit', timeZone: "UTC"}).format(date);
                 dateLabel.push(dateStr);
                 confirmed.push(data[i].Global_Confirmed);
                 deaths.push(data[i].Global_Deaths);
