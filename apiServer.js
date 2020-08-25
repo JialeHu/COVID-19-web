@@ -23,8 +23,8 @@ function apiServer(app, User) {
     const Data = mongoose.model("Data", dataSchema);
 
     // -----------------------------Update Database Once a Day--------------
-    const job = new CronJob('0 0 1 * * 0-6', function() {
-            // Runs every day at 01:00:00 AM.
+    const job = new CronJob('0 0 1,6,16 * * 0-6', function() {
+            // Runs every day at 01:00:00 AM and 06:00:00 AM.
             console.log("Start Updating Database");
             updateDatabase(Data);
         }, function() {
