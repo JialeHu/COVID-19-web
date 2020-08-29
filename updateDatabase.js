@@ -79,9 +79,12 @@ function getLatestDate(Data, callback) {
 }
 
 function updateDatabase(Data) {
+    const initialDate = new Date(2020, 0, 22);
     getLatestDate(Data, (err, date) => {
         if (err) {
             console.log(err);
+        } else if (!date) { // No Data
+            fetchAndInsert(initialDate, Data); // Fetch All Data
         } else {
             date.setDate(date.getDate() + 1);
             fetchAndInsert(date, Data);
