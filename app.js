@@ -32,7 +32,7 @@ app.use(passport.session());
 
 // --------------------------------Setup DB----------------------------------
 // const url = "mongodb://localhost:27017/covid19DB" // TODO
-const url = "mongodb+srv://covid19-app:hjl123321@cluster0.wjy9x.mongodb.net/covid19DB?retryWrites=true&w=majority";
+const url = "mongodb+srv://" + process.env.MONGODB_ACCOUNT + "@cluster0.wjy9x.mongodb.net/covid19DB?retryWrites=true&w=majority";
 mongoose.connect(url, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
